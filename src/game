@@ -1,0 +1,51 @@
+public class game {
+
+	private Player playerTwo;
+	private Player playerOne;
+  private int pOneScore = 0;
+	private int pTwoScore = 0;
+	
+	public game(String playerOne, String playerTwo) {
+		this.playerOne = new Player(playerOne);
+		this.playerTwo = new Player(playerTwo);
+	}
+  
+  private String scoreTransco(int currentScore) {
+		switch (currentScore) {
+		case 3:
+			return "40";
+		case 2:
+			return "30";
+		case 1: 
+			return "15";
+		case 0:
+			return "0";
+		}
+		throw new IllegalArgumentException("Illegal score: " + currentScore);
+	}
+
+	public String score() {
+
+		if (playerOne.isWinner(playerTwo)) {
+			return playerOne.getName() + " wins";
+		}else if (playerTwo.isWinner(playerOne)){
+      return playerTwo.getName() + " wins";
+    }
+		
+    if (playerOne.hasAdvantage(playerTwo)) {
+			return playerOne.getName() + " Advantage";
+		}else if (playerTwo.hasAdvantage(playerOne)){
+      return playerTwo.getName() + " Advantage";
+    }
+
+		if (playerOne.isDeuce(playerTwo))
+			return "Deuce";
+		
+		if(pOneScore == pTwoScore) {
+			return translateScore(pOneScore) + " all";
+		}
+		
+		return translateScore(pOneScore) + "," + translateScore(pTwoScore);
+	}
+
+}
