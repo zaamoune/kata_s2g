@@ -22,7 +22,7 @@ public class Game {
 		throw new IllegalArgumentException("Illegal score: " + currentScore);
 	}
 
-	public String score() {
+	public String getScore() {
 
 		if (playerOne.isWinner(playerTwo)) {
 			return playerOne.getName() + " wins";
@@ -40,7 +40,7 @@ public class Game {
 			return "Deuce";
 		}
 		
-		return translateScore(pOneScore) + "," + translateScore(pTwoScore);
+		return translateScore(playerOne.getScore()) + "," + translateScore(playerTwo.getScore());
 	}
 
 }
