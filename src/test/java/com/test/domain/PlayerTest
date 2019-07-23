@@ -1,0 +1,22 @@
+package com.test.domain;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.domain.Player;
+
+public class PlayerTest {
+
+	@Test
+	public void testPlayerInitScore() {
+		Player p = new Player("Player 1");
+		Assert.assertEquals(0, p.getScore());
+	}
+
+	@Test
+	public void testPlayerAddScore() {
+		Player p = new Player("Player 1");
+		p.addScore();
+		Assert.assertEquals(1, p.getScore());
+	}
+}
