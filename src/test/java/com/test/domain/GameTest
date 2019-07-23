@@ -1,0 +1,103 @@
+package com.test.domain;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.domain.Game;
+
+public class GameTest {
+
+	Game game = new Game("Player 1", "Player 2");
+
+	@Test
+	public void testPlayerOneWinsRoundOne() {
+		game.getPlayerOne().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("15,0", score);
+	}
+
+	@Test
+	public void testFifteenAll() {
+		game.getPlayerOne().addScore();
+		game.getPlayerTwo().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("15,15", score);
+	}
+
+	@Test
+	public void testPlayerWinsTwoRounds() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("30,0", score);
+	}
+
+	@Test
+	public void testPlayerWinsThreeRounds() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("40,0", score);
+	}
+
+	@Test
+	public void testPlayersDeuce() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("Deuce", score);
+	}
+
+	@Test
+	public void testPlayerWins() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("Player 1 wins", score);
+	}
+
+	@Test
+	public void testPlayerAdvantage() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("Player 2 Advantage", score);
+	}
+
+	@Test
+	public void testPlayerWinsAfterAdvantage() {
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+		game.getPlayerOne().addScore();
+
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+		game.getPlayerTwo().addScore();
+
+		String score = game.getScore();
+		Assert.assertEquals("Player 2 wins", score);
+	}
+}
