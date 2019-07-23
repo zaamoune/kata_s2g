@@ -1,0 +1,80 @@
+package com.domain;
+
+public class Game {
+	private Player playerTwo;
+	private Player playerOne;
+
+	public Game(String playerOne, String playerTwo) {
+		this.playerOne = new Player(playerOne);
+		this.playerTwo = new Player(playerTwo);
+	}
+
+	private String scoreTransco(int currentScore) {
+		switch (currentScore) {
+		case 3:
+			return "40";
+		case 2:
+			return "30";
+		case 1:
+			return "15";
+		case 0:
+			return "0";
+		}
+		throw new IllegalArgumentException("Illegal score: " + currentScore);
+	}
+
+	public String getScore() {
+
+		if (isWinner(playerOne, playerTwo)) {
+			return playerOne.getName() + " wins";
+		} else if (isWinner(playerTwo, playerOne)) {
+			return playerTwo.getName() + " wins";
+		}
+
+		if (hasAdvantage(playerOne, playerTwo)) {
+			return playerOne.getName() + " Advantage";
+		} else if (hasAdvantage(playerTwo, playerOne)) {
+			return playerTwo.getName() + " Advantage";
+		}
+
+		if (isDeuce(playerOne, playerTwo)) {
+			return "Deuce";
+		}
+
+		return scoreTransco(playerOne.getScore()) + "," + scoreTransco(playerTwo.getScore());
+	}
+
+	public boolean isDeuce(Player one, Player opponent) {
+		return one.getScore() >= 3 && one.getScore() == opponent.getScore();
+	}
+
+	public boolean isWinner(Player one, Player opponent) {
+		if (one.getScore() >= 4 && one.getScore() >= opponent.getScore() + 2) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean hasAdvantage(Player one, Player opponent) {
+		if (one.getScore() >= 4 && one.getScore() > opponent.getScore()) {
+			return true;
+		}
+		return false;
+	}
+
+	public Player getPlayerTwo() {
+		return playerTwo;
+	}
+
+	public void setPlayerTwo(Player playerTwo) {
+		this.playerTwo = playerTwo;
+	}
+
+	public Player getPlayerOne() {
+		return playerOne;
+	}
+
+	public void setPlayerOne(Player playerOne) {
+		this.playerOne = playerOne;
+	}
+}
